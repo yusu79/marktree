@@ -1,4 +1,9 @@
 # marktree
+![GitHub License](https://img.shields.io/github/license/yusu79/marktree)
+![PyPI - Version](https://img.shields.io/pypi/v/marktree)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/marktree)
+
+
 This command converts headings in a Markdown file (.md) into a tree-like structure and outputs it.
 
 [日本語のREADMEはこちらから。](https://github.com/yusu79/marktree/blob/main/README_jp.md)
