@@ -1,7 +1,7 @@
 # marktree
 ![GitHub License](https://img.shields.io/github/license/yusu79/marktree)
 ![PyPI - Version](https://img.shields.io/pypi/v/marktree)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/marktree)
+![PyPI - Downloads](https://img.shields.io/pypi/dw/marktree)
 
 Markdownファイル（.md）の見出しを木構造で表示するコマンドです。
 
@@ -16,21 +16,23 @@ pipでインストールします。
 pip install marktree
 ```
 
-### Windowsでインストールする場合
-Windowsで`pip install`をすると、以下の様なメッセージが出る時があります:
-```powershell:
+
+### Windowsでのインストール手順
+
+Windowsで`marktree`を`pip`を使用してインストールする際、`pip install`を実行した後に以下のような警告メッセージが表示されることがあります：
+
+```powershell
 WARNING: The script marktree.exe is installed in 'C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts' which is not on PATH.
   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 ```
 
-これはPATHが通っていないことに対する警告です。
-この状態だと、`python -m marktree`は実行されますが、`marktree`だけではコマンドが無いと警告され、実行されません。
+この警告は、そのディレクトリがシステムの`PATH`に含まれていないことを示しています。この状態では、`python -m marktree`は実行されますが、`marktree`だけでは警告が表示されて実行できません。
 
-`Profile.ps1`に上記のPATHを通してください:
-```ps1:Profile.ps1
+これを解決するために、`Profile.ps1`に上記の`PATH`を追加してください：
+
+```powershell
 $env:path += ";C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts"
 ```
-
 
 
 
