@@ -1,4 +1,8 @@
 # marktree
+![GitHub License](https://img.shields.io/github/license/yusu79/marktree)
+![PyPI - Version](https://img.shields.io/pypi/v/marktree)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/marktree)
+
 Markdownファイル（.md）の見出しを木構造で表示するコマンドです。
 
 <!-- omit in toc -->
@@ -12,7 +16,29 @@ pipでインストールします。
 pip install marktree
 ```
 
+### Windowsでインストールする場合
+Windowsで`pip install`をすると、以下の様なメッセージが出る時があります:
+```powershell:
+WARNING: The script marktree.exe is installed in 'C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+
+これはPATHが通っていないことに対する警告です。
+この状態だと、`python -m marktree`は実行されますが、`marktree`だけではコマンドが無いと警告され、実行されません。
+
+`Profile.ps1`に上記のPATHを通してください:
+```ps1:Profile.ps1
+$env:path += ";C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts"
+```
+
+
+
+
 ## 使い方（Quick usage）
+```bash:
+$ marktree [-h|--help] [-L|-l|--level 階層] [foo.md]
+```
+
 | オプション          | 説明                                                         | 
 | ------------------ | ------------------------------------------------------------------ | 
 | marktree -h        | ヘルプ画面を表示します。                                           | 
@@ -38,7 +64,7 @@ pip install marktree
 # h1 
 ``` 
 
-- 通常の出力（デフォルトの階層は6）。
+- 通常の出力（デフォルトの階層は6）:
 ```
 $ marktree hoge.md
 ├── h1 
@@ -56,7 +82,7 @@ $ marktree hoge.md
 └── h1 
 ```
 
-- `-L 3`を使用して階層を決める。
+- `-L 3`を使用して階層を決める:
 ```
 $ marktree -L 3 hoge.md
 ├── h1 

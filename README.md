@@ -19,9 +19,26 @@ Install via pip:
 pip install marktree
 ```
 
+### Instructions for Installing on Windows
+When installing with `pip` on Windows, you may encounter the following message after running `pip install`:
+
+```powershell:
+WARNING: The script marktree.exe is installed in 'C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+```
+
+This is a warning indicating that the directory is not included in the system's `PATH`. In this state, while `python -m marktree` will execute, the command `marktree` alone will result in a warning, and it will not run.
+
+To address this, add the mentioned PATH to your `Profile.ps1`:
+
+```powershell:Profile.ps1
+$env:path += ";C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts"
+```
+
+
 ## Quick usage
-```python:
-marktree [-h|--help] [-L|-l|--level level] [foo.md]
+```bash:
+$ marktree [-h|--help] [-L|-l|--level level] [foo.md]
 ```
 
 | options            | description                                                        | 
@@ -49,7 +66,7 @@ Prepare the following Markdown named `foo.md`.
 # h1 
 ``` 
 
-- Regular output (default depth is 6).
+- Regular output (default depth is 6):
 ```
 $ marktree foo.md
 ├── h1 
@@ -68,7 +85,7 @@ $ marktree foo.md
 
 ```
 
-- Use `-L 3` to determine the depth.
+- Use `-L 3` to determine the depth:
 ```
 $ marktree -L 3 foo.md
 ├── h1 
