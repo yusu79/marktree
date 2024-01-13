@@ -1,7 +1,7 @@
 # marktree
 ![GitHub License](https://img.shields.io/github/license/yusu79/marktree)
 ![PyPI - Version](https://img.shields.io/pypi/v/marktree)
-![PyPI - Downloads](https://img.shields.io/pypi/dw/marktree)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/marktree)
 
 Markdownファイル（.md）の見出しを木構造で表示するコマンドです。
 
