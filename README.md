@@ -1,57 +1,48 @@
 # marktree
-
 ![GitHub License](https://img.shields.io/github/license/yusu79/marktree)
 ![PyPI - Version](https://img.shields.io/pypi/v/marktree)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/marktree)
 
-This command converts headings in a Markdown file (.md) into a tree-like structure and outputs it.
+Markdownファイル（.md）の見出しを木構造で表示するコマンドです。
 
-[Read this in Japanese (日本語のREADMEはこちらから)](https://github.com/yusu79/marktree/blob/main/README_jp.md)
+[Read this in English.](https://github.com/yusu79/marktree/blob/main/README_en.md)
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Setup](#setup)
-- [Quick Usage](#quick-usage)
-- [Usage](#usage)
-
-## Setup
-Install via pip:
-```bash
+<!-- omit in toc -->
+## 目次（TOC）
+- [インストール（Setup）](#インストールsetup)
+- [使い方（Quick usage）](#使い方quick-usage)
+- [解説（Usage）](#解説usage)
+- [使用しているパッケージ](#使用しているパッケージ)
+## インストール（Setup）
+pipでインストールします。
+```bash:
 pip install marktree
 ```
 
-### Windows Installation Instructions
+### Windowsで「警告」が出た時の対処方法
 
-When installing `marktree` using `pip` on Windows, you might see a warning message after running `pip install`:
+Windowsで上記のコマンドを実行した際に「警告（WARNING）」が表示されたなら、以下の記事を参照してください。
 
-```powershell
-WARNING: The script marktree.exe is installed in 'C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts' which is not on PATH.
-  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+参考: [【Python Windows】pip install でPATHが通らない時の解決方法 | ゆすノート](https://yusu79.com/python-path-issue/)
+
+
+
+## 使い方（Quick usage）
+```bash:
+$ marktree [オプション] [foo.md]
 ```
 
-This warning indicates that the directory is not included in the system's `PATH`. In this situation, running `python -m marktree` will work, but using the command `marktree` alone will result in a warning, preventing it from running.
+| オプション         | 説明                                                                                                    | 
+| ------------------ | ------------------------------------------------------------------------------------------------------- | 
+| marktree -h        | ヘルプ画面を表示します。                                                                                | 
+| marktree --help_jp | ヘルプ画面を日本語で表示します。                                                                        | 
+| marktree -L 3      | -Lオプションはツリーが表示される階層を決定します。                                                      | 
+| marktree -C        | -Cオプションは、クリップボードにコピーされたMarkdownテキストをツリー形式で直接出力します。 | 
 
-To resolve this, add the specified PATH to your `Profile.ps1`:
 
-```powershell
-$env:path += ";C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts"
-```
-
-
-## Quick Usage
-```bash
-$ marktree [-h|--help] [-L|-l|--level level] [foo.md]
-```
-
-| Options            | Description                                                        | 
-| ------------------ | ------------------------------------------------------------------ | 
-| marktree -h        | Display the help screen.                                           | 
-| marktree --help_jp | Display the help screen in Japanese.                               | 
-| marktree -L 3      | The -L option determines the level at which the tree is displayed. | 
-
-### Example
-Prepare the following Markdown named `foo.md`.
-```md
+### 例
+次のようなMarkdownファイル`hoge.md`を用意してください。
+```md:
 # h1 
 ## h2 
 ### h3 
@@ -65,11 +56,11 @@ Prepare the following Markdown named `foo.md`.
 ###### h6 
 ### h3
 # h1 
-```
+``` 
 
-- Regular output (default depth is 6):
-```bash
-$ marktree foo.md
+- 通常の出力（デフォルトの階層は6）:
+```
+$ marktree hoge.md
 ├── h1 
 │  ├── h2 
 │  │  └── h3 
@@ -85,9 +76,21 @@ $ marktree foo.md
 └── h1 
 ```
 
-- Use `-L 3` to determine the depth:
-```bash
-$ marktree -L 3 foo.md
+- `-L 3`を使用して階層を決める:
+```
+$ marktree -L 3 hoge.md
+├── h1 
+│  ├── h2 
+│  │  └── h3 
+│  ├── h2 
+│  └── h2
+│     ├── h3 
+│     └── h3
+└── h1 
+```
+- `-C`を使用すると、クリップボードにコピーされたMarkdownテキストをツリー形式で直接出力します。さらに、`-L`を組み合わせて使うこともできます:
+```
+$ marktree -C -L 3 
 ├── h1 
 │  ├── h2 
 │  │  └── h3 
@@ -98,8 +101,16 @@ $ marktree -L 3 foo.md
 └── h1 
 ```
 
-## Usage
 
-The `marktree` command outputs the file as a tree hierarchy, depending on the `#` of the Markdown file. The `-L` option specifies the depth, as in the original `tree` command. Note that the depth can be from 1 to 6, and specifying more than that will result in an error.
 
-The order of the options is in no particular order, including the Markdown file to be passed. Also, if you pass multiple files like `markdown foo.md hoge.md`, **only the last file** will be converted and output.
+## 解説（Usage）
+`marktree`コマンドは、Markdownファイルの`#`に基づいてファイルをツリー階層として出力します。
+`-L`オプションは、元の`tree`コマンドと同様に深さを指定します。深さは1から6まで可能で、それ以上を指定するとエラーが発生しますので注意してください。
+`-C`オプションは、クリップボードにコピーされたMarkdownテキストをツリー形式で直接出力します。これは出力前にMarkdownテキストを別のファイルにコピーする必要がなくなるので便利です。
+
+
+オプションの順序は、渡すMarkdownファイルを含めて特に決まっていません。
+また、`markdown hoge.md foo.md`のように複数のファイルを渡す場合、**最後のファイルのみ**が変換されて出力されます。
+
+## 使用しているパッケージ
+- [pyperclip](https://github.com/asweigart/pyperclip)
