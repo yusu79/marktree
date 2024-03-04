@@ -19,12 +19,14 @@ Install via pip:
 pip install marktree
 ```
 
-### Handling the "Warning" on Windows
+### Handling "Warning" on Windows
+If you encounter a "`WARNING: The script clipcount.exe is installed in 'path' which is not on PATH.`" when running the above command on Windows, please refer to the following article.
 
+Reference: [【Python Windows】pip install でPATHが通らない時の解決方法 | ゆすノート](https://yusu79.com/python-path-issue/)
 
-If you received a "Warning" when executing the above command on Windows, please refer to the following article.
+If you see "`WARNING: Failed to write executable - trying to use .deleteme logic`," please run the terminal with administrator privileges and then proceed with the installation. For more details, refer to the following article:
 
-Reference: [Resolution for PATH not being set when using pip install in Python on Windows | Yusu Note](https://yusu79.com/python-path-issue/)
+Reference: [Error installing package with executable · Issue #9023 · pypa/pip](https://github.com/pypa/pip/issues/9023)
 
 
 ## Quick Usage
