@@ -21,9 +21,13 @@ pip install marktree
 
 ### Windowsで「警告」が出た時の対処方法
 
-Windowsで上記のコマンドを実行した際に「警告（WARNING）」が表示されたなら、以下の記事を参照してください。
+Windowsで上記のコマンドを実行した際に「`"WARNING: The script clipcount.exe is installed in 'ファイルパス' which is not on PATH."`」が表示されたなら、以下の記事をご参照ください。
 
 参考: [【Python Windows】pip install でPATHが通らない時の解決方法 | ゆすノート](https://yusu79.com/python-path-issue/)
+
+「`WARNING: Failed to write executable - trying to use .deleteme logic`」が表示されたなら、管理者権限でターミナルを実行した上でインストールしてください。詳しくは以下の記事をご参照ください。
+
+参考: [Error installing package with executable · Issue #9023 · pypa/pip](https://github.com/pypa/pip/issues/9023)
 
 
 
