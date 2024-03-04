@@ -66,13 +66,20 @@ def tree_generate(lines, print_depth):
         6: "none"
     }
     output=[]
+    ignore_code_block = False
     for line in reversed(lines):
-        if line.startswith('#') :
-            current = line.split(None, 1)
-            current_depth = len(current[0])
-            current_name = current[1].strip("\n")
-            if current_depth <= print_depth:
-                print_branch(current_depth, current_name, dict, output)
+        if line.startswith("```") :
+            ignore_code_block = not ignore_code_block
+        if ignore_code_block:
+            continue
+        else:
+            if line.startswith('#') :
+                current = line.split(None, 1)
+                current_depth = len(current[0])
+                current_name = current[1].strip("\n")
+                if current_depth <= print_depth:
+                    print_branch(current_depth, current_name, dict, output)
+
 
     for i in reversed(output):
         print(i)
