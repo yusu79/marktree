@@ -24,9 +24,9 @@ If you encounter a "`WARNING: The script clipcount.exe is installed in 'path' wh
 
 Reference: [【Python Windows】pip install でPATHが通らない時の解決方法 | ゆすノート](https://yusu79.com/python-path-issue/)
 
-If you see "`WARNING: Failed to write executable - trying to use .deleteme logic`," please run the terminal with administrator privileges and then proceed with the installation. For more details, refer to the following article:
+If you see "`WARNING: Failed to write executable - trying to use .deleteme logic`", please refer to the following article:
 
-Reference: [Error installing package with executable · Issue #9023 · pypa/pip](https://github.com/pypa/pip/issues/9023)
+Reference: [【Windows】警告が出て「pip install」できない時の解決方法 | ゆすノート](https://yusu79.com/pip-install-failure-fix/)
 
 
 ## Quick Usage
