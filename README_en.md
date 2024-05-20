@@ -12,6 +12,7 @@ This command converts headings in a Markdown file (.md) into a tree-like structu
 - [Quick Usage](#quick-usage)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
+- [Dev-diary](#dev-diary)
 
 ## Setup
 Install via pip:
@@ -114,3 +115,6 @@ The order of the options is in no particular order, including the Markdown file 
 
 ## Dependencies
 - [pyperclip](https://github.com/asweigart/pyperclip)
+
+## Dev-diary
+- [【個人開発】Markdownを木構造で出力できる「marktree」 | ゆすノート](https://yusu79.com/dev-marktree/)

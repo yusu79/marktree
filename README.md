@@ -13,6 +13,7 @@ Markdownファイル（.md）の見出しを木構造で表示するコマンド
 - [使い方（Quick usage）](#使い方quick-usage)
 - [解説（Usage）](#解説usage)
 - [使用しているパッケージ](#使用しているパッケージ)
+- [開発日記(dev-diary)](#開発日記dev-diary)
 ## インストール（Setup）
 pipでインストールします。
 ```bash:
@@ -118,3 +119,6 @@ $ marktree -C -L 3
 
 ## 使用しているパッケージ
 - [pyperclip](https://github.com/asweigart/pyperclip)
+
+## 開発日記(dev-diary)
+- [【個人開発】Markdownを木構造で出力できる「marktree」 | ゆすノート](https://yusu79.com/dev-marktree/)
