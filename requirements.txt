@@ -19,7 +19,7 @@ pyperclip==1.8.2
 pyproject_hooks==1.0.0
 pywin32-ctypes==0.2.2
 readme-renderer==42.0
-requests==2.32.2
+requests==2.32.4
 requests-toolbelt==1.0.0
 rfc3986==2.0.0
 rich==13.7.0
