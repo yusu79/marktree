@@ -1,43 +1,33 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "marktree"
-version = "1.1.1"
-dependencies = [
-    "pyperclip >= 1.8.2"
-]
-requires-python = ">=3.8"
+version = "1.2.0"
+description = "Convert headings in a Markdown file (.md) into a tree-like structure and output."
 authors = [
-    {name="yusu79"},
-    {email="oss@yusu79.com"}
+    {name = "yusu79",email = "oss@yusu79.com"}
 ]
-description = "convert headings in a Markdown file (.md) into a tree-like structure and output."
 readme = "README_en.md"
-license = {file = "LICENSE"}
-keywords = [
-    "markdown", 
-    "tree", 
-    "pyperclip"
+requires-python = ">=3.13"
+dependencies = [
+    "pyperclip (>=1.10.0,<2.0.0)"
 ]
-classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Intended Audience :: Other Audience",
-  "Topic :: Terminals",
-  "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python"
-]
+license = { text = "MIT" }
 
 [project.urls]
 Homepage = "https://yusu79.com"
 Repository = "https://github.com/yusu79/marktree"
+Changelog = "https://github.com/yusu79/marktree/blob/main/CHANGELOG.md"
 
-[project.scripts]
-marktree = "marktree:main"
+[project.scripts] # cli.pyに登録されたmain関数を直接実行できる
+marktree = "marktree.cli:main" 
 
-[project.optional-dependencies]
+[tool.poetry]
+packages = [{include = "marktree", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
 dev = [
-    "build",
-    "twine",
+    "pytest (>=8.4.2,<9.0.0)"
 ]
