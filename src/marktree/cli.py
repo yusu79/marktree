@@ -1,5 +1,13 @@
-import sys, pyperclip
+import sys
+import pyperclip
+
 from .core import render_tree
+from .exceptions import (
+    InputFileNotFoundError,
+    InvalidEncodingError,
+    InvalidInputError,
+    InvalidMarkdownError,
+)
 from .usage import usage_en, usage_jp
 
 # パイプやリダイレクト時も UTF-8 で出力する
@@ -9,6 +17,14 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
+def print_error(title: str, message: str) -> None:
+    print(
+        f"\033[91m"
+        f"Error: {title}\n"
+        f"{message}"
+        f"\033[0m",
+        file=sys.stderr,
+    )
 
 def main():
     """
@@ -52,15 +68,11 @@ def main():
             elif arg in ["-C", "-c", "--clip"]:
                 try:
                     clipboard = pyperclip.paste()
-                    options["lines"] = clipboard.splitlines() if clipboard else []
-                    if clipboard:
-                        options['lines'] = clipboard.split("\r\n")
-                    else:
-                        options['lines'] = []
+                    options["lines"] = clipboard.split("\r\n") if clipboard else []
                 except Exception as e:
-                    print(
-                        f"\033[91mError: Clipboard Read Failed\n"
-                        f"クリップボードの読み取りに失敗しました: {e}\033[0m"
+                    print_error(
+                        "Clipboard Read Failed",
+                        f"クリップボードの読み取りに失敗しました: {e}",
                     )
                     return 1
                 i += 1
@@ -73,46 +85,94 @@ def main():
                 try:
                     options["print_depth"] = int(sys.argv[i + 1])
                 except IndexError:
-                    print("\033[91mError: Missing Hierarchy Level\n階層レベルを指定してください。例: -L 2\033[0m")
+                    print_error(
+                        "Missing Hierarchy Level",
+                        "階層レベルを指定してください。例: -L 2",
+                    )
                     return 1
                 except ValueError:
-                    print("\033[91mError: Invalid Hierarchy Level\n階層には正の整数を指定してください。例: -L 2\033[0m")
+                    print_error(
+                        "Invalid Hierarchy Level",
+                        "階層には正の整数を指定してください。例: -L 2",
+                    )
                     return 1
                 i += 2
 
             elif arg in ["-P", "-p", "--plain"]:
-                options['plain'] = True
+                options["plain"] = True
                 i += 1
 
             elif arg in ["-E", "-e", "--encoding"]:
                 try:
-                    options['encoding'] = sys.argv[i + 1]
+                    options["encoding"] = sys.argv[i + 1]
                 except IndexError:
-                    print("\033[91mError: Missing Encoding\n文字コードを指定してください。例: -E utf-8\033[0m")
+                    print_error(
+                        "Missing Encoding",
+                        "文字コードを指定してください。例: -E utf-8",
+                    )
                     return 1
                 i += 2
 
             elif arg.startswith("-"):
-                print("\033[91mError: Invalid Option\n無効なオプションです。--help を使用してください。\033[0m")
+                print_error(
+                    "Invalid Option",
+                    "無効なオプションです。--help を使用してください。",
+                )
                 return 1
 
             else:
-                options['filename'] = arg
+                options["filename"] = arg
                 i += 1
 
     except Exception as e:
-        print(f"\033[91mError: Unexpected Error\n予期せぬエラーが発生しました: {e}\033[0m")
+        print_error(
+            "Error: Unexpected Error",
+            f"予期せぬエラーが発生しました: {e}"
+        )
         return 1
 
     # 階層レベルチェック
     depth = options["print_depth"]
     if not 1 <= depth <= 6:
-        print("\033[91mError: Hierarchy Level Out of Range\n階層は1から6までの間で指定してください。\033[0m")
+        print_error(
+            "Error: Hierarchy Level Out of Range",
+            "階層は1から6までの間で指定してください。"
+        )
         return 1
 
     copy = options.pop("copy")
 
-    text = render_tree(**options)
+    try:
+        text = render_tree(**options)
+
+    except InputFileNotFoundError:
+        print_error(
+            "File Not Found",
+            "指定されたMarkdownファイルが見つかりません。",
+        )
+        return 1
+
+    except InvalidEncodingError:
+        print_error(
+            "Unknown Encoding",
+            "指定された文字コードはサポートされていません。\n"
+            "utf-8, cp932, shift_jis などを指定してください。",
+        )
+        return 1
+
+    except InvalidInputError:
+        print_error(
+            "Invalid Input",
+            "入力ファイルまたは入力テキストを指定してください。",
+        )
+        return 1
+
+    except InvalidMarkdownError:
+        print_error(
+            "Empty Heading",
+            "Markdownファイルから文章のない見出し（#）が検出されました。",
+        )
+        return 1
 
     if copy:
         pyperclip.copy(text)

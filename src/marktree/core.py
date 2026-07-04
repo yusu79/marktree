@@ -1,5 +1,9 @@
-import sys
-
+from .exceptions import (
+    InputFileNotFoundError,
+    InvalidEncodingError,
+    InvalidInputError,
+    InvalidMarkdownError,
+)
 
 def append_tree_branch(depth, name, tree_state, output):
     """
@@ -55,6 +59,9 @@ def generate_tree(lines, print_depth):
         if line.startswith("#"):
             current = line.split(None, 1)
 
+            if len(current) != 2:
+                raise InvalidMarkdownError()
+
             depth = len(current[0])
             name = current[1].rstrip("\n")
 
@@ -84,6 +91,9 @@ def generate_plain(lines, print_depth):
         if line.startswith("#"):
             current = line.split(None, 1)
 
+            if len(current) != 2:
+                raise InvalidMarkdownError()
+
             depth = len(current[0])
 
             if depth <= print_depth:
@@ -107,51 +117,25 @@ def render_tree(
         str
     """
 
-    try:
-        if filename is not None:
-            try:
-                with open(filename, "r", encoding=encoding) as file:
-                    lines = file.readlines()
 
-            except LookupError:
-                print(
-                    f"\033[91m"
-                    f"Error: Unknown Encoding\n"
-                    f"指定された文字コード '{encoding}' はサポートされていません。"
-                    f"utf-8, cp932, shift_jis などを指定してください。"
-                    f"\033[0m"
-                )
-                sys.exit(1)
+    if filename is not None:
+        try:
+            with open(filename, "r", encoding=encoding) as file:
+                lines = file.readlines()
 
-            except UnicodeDecodeError as e:
-                print(
-                    f"\033[91m"
-                    f"Error: Decode Failed\n"
-                    f"ファイルを '{encoding}' でデコードできませんでした。\n"
-                    f"詳細: {e}"
-                    f"\033[0m"
-                )
-                sys.exit(1)
+        except LookupError as e:
+            raise InvalidEncodingError() from e
 
-        if plain:
-            return generate_plain(lines, print_depth)
+        except UnicodeDecodeError as e:
+            raise InvalidEncodingError() from e
 
-        return generate_tree(lines, print_depth)
+        except FileNotFoundError as e:
+            raise InputFileNotFoundError() from e
 
-    except (TypeError, FileNotFoundError):
-        print(
-            "\033[91m"
-            "Error: File Not Found\n"
-            "指定されたMarkdownファイルが見つかりません。"
-            "\033[0m"
-        )
-        sys.exit(1)
+    if lines is None:
+        raise InvalidInputError()
 
-    except IndexError:
-        print(
-            "\033[91m"
-            "Error: Empty Heading\n"
-            "Markdownファイルから文章のない見出し（#）が検出されました。"
-            "\033[0m"
-        )
-        sys.exit(1)
+    if plain:
+        return generate_plain(lines, print_depth)
+
+    return generate_tree(lines, print_depth)
