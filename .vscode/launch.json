@@ -1,0 +1,83 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test1",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test1.md"
+            ]
+        },
+        {
+            "name": "test2",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test2.md"
+            ]
+        },
+        {
+            "name": "test3",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test3.md"
+            ]
+        },
+        {
+            "name": "test4",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test4.md"
+            ]
+        },
+                {
+            "name": "test5",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test5.md"
+            ]
+        },
+        {
+            "name": "test6",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "marktree",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "args": [
+                "${workspaceFolder}/tests/data/test6.md"
+            ]
+        },
+    ]
+}

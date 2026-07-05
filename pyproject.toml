@@ -5,10 +5,11 @@ description = "Convert headings in a Markdown file (.md) into a tree-like struct
 authors = [
     {name = "yusu79",email = "oss@yusu79.com"}
 ]
-readme = "README_en.md"
+readme = "README.en.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pyperclip (>=1.10.0,<2.0.0)"
+    "pyperclip (>=1.10.0,<2.0.0)",
+    "pytest (>=9.1.1,<10.0.0)"
 ]
 license = { text = "MIT" }
 
