@@ -11,7 +11,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test1.md"
+                "${workspaceFolder}/tests/data/test01.md"
             ]
         },
         {
@@ -24,7 +24,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test2.md"
+                "${workspaceFolder}/tests/data/test02.md"
             ]
         },
         {
@@ -37,7 +37,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test3.md"
+                "${workspaceFolder}/tests/data/test03.md"
             ]
         },
         {
@@ -50,7 +50,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test4.md"
+                "${workspaceFolder}/tests/data/test04.md"
             ]
         },
                 {
@@ -63,7 +63,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test5.md"
+                "${workspaceFolder}/tests/data/test05.md"
             ]
         },
         {
@@ -76,7 +76,7 @@
                 "PYTHONPATH": "${workspaceFolder}/src"
             },
             "args": [
-                "${workspaceFolder}/tests/data/test6.md"
+                "${workspaceFolder}/tests/data/test06.md"
             ]
         },
     ]
